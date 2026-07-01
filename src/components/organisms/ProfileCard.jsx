@@ -1,13 +1,10 @@
 import { motion } from "framer-motion";
 import avatar from "../../assets/images/avatar.jpeg";
-import {
-  FaMapMarkerAlt,
-  FaEnvelope,
-  FaLinkedin,
-  FaGlobe,
-} from "react-icons/fa";
+import { useTheme } from "@/context/ThemeContext";
 
 const ProfileCard = ({ hero }) => {
+  const { isDark } = useTheme();
+
   if (!hero) return null;
 
   return (
@@ -15,15 +12,26 @@ const ProfileCard = ({ hero }) => {
       initial={{ opacity: 0, x: 40 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.6 }}
-      whileHover={{ y: -6 }}
-      className="
-        bg-white
-        rounded-3xl
-        shadow-2xl
-        p-6
+      whileHover={{
+        y: -8,
+        scale: 1.02,
+      }}
+      className={`
         w-full
         max-w-sm
-      "
+        rounded-3xl
+        p-6
+        backdrop-blur-xl
+        border
+        transition-all
+        duration-500
+
+        ${
+          isDark
+            ? "bg-slate-900/70 border-slate-900 shadow-1xl shadow-cyan-700/20"
+            : "bg-white/80 border-slate-200 shadow-2xl"
+        }
+      `}
     >
       {/* Avatar */}
       <div className="flex justify-center">
@@ -37,36 +45,52 @@ const ProfileCard = ({ hero }) => {
             object-cover
             border-4
             border-cyan-500
-            shadow-lg
+            shadow-xl
           "
         />
       </div>
 
       {/* Experience */}
-      <div className="mt-7">
-        <h3 className="font-semibold text-gray-800 mb-4">
+      <div className="mt-8">
+        <h3
+          className={`font-bold text-lg mb-5 ${
+            isDark ? "text-white" : "text-slate-900"
+          }`}
+        >
           Experience
         </h3>
 
-        <div className="space-y-4">
+        <div className="space-y-5">
           {hero.experience.map((exp) => (
             <div
               key={`${exp.company}-${exp.period}`}
               className="border-l-4 border-cyan-500 pl-4"
             >
-              <h4 className="font-semibold text-gray-800">
+              <h4
+                className={`font-semibold ${
+                  isDark ? "text-white" : "text-slate-900"
+                }`}
+              >
                 {exp.company}
               </h4>
 
-              <p className="text-cyan-600 text-sm">
+              <p className="text-cyan-500 text-sm font-medium">
                 {exp.role}
               </p>
 
-              <p className="text-xs text-gray-800 mb-1">
+              <p
+                className={`text-xs mb-2 ${
+                  isDark ? "text-slate-400" : "text-slate-500"
+                }`}
+              >
                 {exp.period}
               </p>
 
-              <p className="text-sm text-gray-600 line-clamp-3">
+              <p
+                className={`text-sm leading-6 ${
+                  isDark ? "text-slate-300" : "text-slate-600"
+                }`}
+              >
                 {exp.summary}
               </p>
             </div>
@@ -76,5 +100,4 @@ const ProfileCard = ({ hero }) => {
     </motion.div>
   );
 };
-
 export default ProfileCard;

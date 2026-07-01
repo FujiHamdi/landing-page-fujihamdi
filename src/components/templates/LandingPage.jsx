@@ -1,42 +1,43 @@
-import BackgroundSVG from "@/assets/background.svg";
-import CategoryList from "@/components/organisms/CategoryList";
 import HeroSection from "@/components/organisms/HeroSection";
-import { motion } from "framer-motion";
-import SkillChecklist from "../organisms/SkillChecklist";
+import ThemeToggle from "../molecules/ThemeToggle";
+import { useTheme } from "@/context/ThemeContext";
 
+export default function LandingPage({ hero }) {
+  const { isDark } = useTheme();
 
-export default function LandingPage({ hero, employees, categories }) {
   return (
-    <>
-      <div className="relative text-white">
-        <div className="absolute inset-0 -z-10">
-          <img
-            src={BackgroundSVG}
-            alt="Background"
-            className="w-full h-full object-cover"
-          />
-        </div>
+    <main
+      className={`
+        relative
+        min-h-screen
+        overflow-hidden
+        transition-all
+        duration-500
+        ${isDark ? "bg-slate-950 text-white" : "bg-white text-slate-900"}
+      `}
+    >
 
-        <HeroSection hero={hero} employees={employees}/>
+      {/* Overlay */}
+      <div
+        className={`
+          absolute inset-0 -z-10 backdrop-blur-[2px] transition-colors duration-500
+          ${
+            isDark
+              ? "bg-slate-950/70"
+              : "bg-white/40"
+          }
+        `}
+      />
 
-       <SkillChecklist items={hero.checkItems} />
-
-        <div className="max-w-6xl block md:hidden mx-auto px-8 py-6 ">
-              <motion.p
-                  className="
-                    block md:hidden
-                    text-md font-bold leading-tight
-                    text-yellow-200
-                    mt-2 whitespace-pre-line underline
-                  "
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, ease: "easeOut" }}
-                >
-                  {hero.ctaLink}
-                </motion.p>
-        </div>  
+      {/* Theme Toggle */}
+      <div className="absolute top-6 right-6 z-50">
+        <ThemeToggle />
       </div>
-    </>
+
+      {/* Hero */}
+      <div className="container mx-auto px-6 lg:px-10 py-10">
+        <HeroSection hero={hero} />
+      </div>
+    </main>
   );
 }
