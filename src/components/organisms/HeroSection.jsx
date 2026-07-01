@@ -46,7 +46,7 @@ export default function HeroSection({ hero }) {
 
           {/* Contact */}
           <motion.div
-            className="space-y-3 text-slate-700 mb-8"
+            className="space-y-3 text-slate-900 mb-8"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4 }}
@@ -57,7 +57,7 @@ export default function HeroSection({ hero }) {
               📧{" "}
               <a
                 href={`mailto:${hero.contact.email}`}
-                className="text-slate-700 hover:text-cyan-600 transition"
+                className="text-slate-900 hover:text-cyan-600 transition"
               >
                 {hero.contact.email}
               </a>
@@ -69,7 +69,7 @@ export default function HeroSection({ hero }) {
                 href={hero.contact.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-slate-700 hover:text-cyan-600 transition underline"
+                className="text-slate-900 hover:text-cyan-600 transition underline"
               >
                 LinkedIn
               </a>
@@ -81,7 +81,7 @@ export default function HeroSection({ hero }) {
                 href={hero.contact.portfolio}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-slate-700 hover:text-cyan-600 transition underline"
+                className="text-slate-900 hover:text-cyan-600 transition underline"
               >
                 Portfolio Website
               </a>
