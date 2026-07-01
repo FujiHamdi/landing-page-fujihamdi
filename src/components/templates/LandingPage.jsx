@@ -1,8 +1,6 @@
 import BackgroundSVG from "@/assets/background.svg";
 import CategoryList from "@/components/organisms/CategoryList";
-import Footer from "@/components/organisms/Footer";
 import HeroSection from "@/components/organisms/HeroSection";
-import Navbar from "@/components/organisms/Navbar";
 import { motion } from "framer-motion";
 import SkillChecklist from "../organisms/SkillChecklist";
 
@@ -18,8 +16,6 @@ export default function LandingPage({ hero, employees, categories }) {
             className="w-full h-full object-cover"
           />
         </div>
-
-        <Navbar />
 
         <HeroSection hero={hero} employees={employees}/>
 
@@ -39,13 +35,8 @@ export default function LandingPage({ hero, employees, categories }) {
                 >
                   {hero.ctaLink}
                 </motion.p>
-        </div>
-
-          <div className="hidden md:block">
-            <CategoryList categories={categories} />
-          </div>      
+        </div>  
       </div>
-      <Footer />
     </>
   );
 }
